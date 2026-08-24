@@ -26,7 +26,6 @@ window.SITE = {
     open: { ru: "Открыть", en: "Open", sr: "Otvori" },
     private: { ru: "закрытый репо", en: "private repo", sr: "privatni repo" },
     gate: { ru: "URL — гейт", en: "URL — gate", sr: "URL — gejt" },
-    now: { ru: "сейчас", en: "now", sr: "sada" },
     outroTitle: {
       ru: "Готов взяться.",
       en: "Ready to ship.",

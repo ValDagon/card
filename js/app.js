@@ -187,9 +187,8 @@
 
     var path = document.getElementById("path-list");
     path.replaceChildren();
-    D.path.forEach(function (p, i) {
+    D.path.forEach(function (p) {
       var row = el("article", "path-row");
-      if (i === 0) row.setAttribute("data-now", t(D.ui.now));
       var when = el("time", "path-when", t(p.when));
       when.translate = false;
       row.appendChild(when);
