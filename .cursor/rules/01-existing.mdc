@@ -1,0 +1,14 @@
+---
+description: Existing skills/MCP first; harvest after a repeatable cycle.
+alwaysApply: true
+---
+
+# Existing first
+
+Before a custom workflow: matching skill in `~/.cursor/skills` or `.cursor/skills`, then awesome lists / MCP (`discover-skills-mcp`). Do not invent crutches.
+
+Non-trivial task → `crystal-pipeline` after this repo has `AGENTS.md`.
+
+End of a repeatable cycle: `crystal-harvest-skill` (canon in the vault; mirror already global). One concrete `improve-always` proposal.
+
+Do not copy a skill body into a rule. Do not default `disable-model-invocation: true`.

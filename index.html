@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0B0A09" />
+    <meta name="color-scheme" content="dark" />
+    <title>Валентин Казанцев — BI, агенты, боты</title>
+    <meta
+      name="description"
+      content="Визитка: аналитика, Telegram-боты, автоматизация. Заказы в РФ — как самозанятый."
+    />
+    <link rel="canonical" href="https://valdagon.github.io/card/" />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./assets/portrait.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://valdagon.github.io/card/" />
+    <meta property="og:title" content="Валентин Казанцев — BI, агенты, боты" />
+    <meta
+      property="og:description"
+      content="Визитка: аналитика, Telegram-боты, автоматизация. Заказы в РФ — как самозанятый."
+    />
+    <meta property="og:image" content="https://valdagon.github.io/card/assets/portrait.jpg" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@700;800&display=swap"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <a class="skip" id="skip" href="#main">К содержанию</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <span class="mark" translate="no">VK</span>
+        <nav class="nav-main" aria-label="Sections">
+          <a href="#stack" data-nav="navStack">Стек</a>
+          <a href="#gigs" data-nav="navGigs">Задачи</a>
+          <a href="#path" data-nav="navCv">Путь</a>
+          <a href="#work" data-nav="navWork">Работы</a>
+          <a href="#contact" data-nav="navContact">Связь</a>
+        </nav>
+        <div class="lang" role="group" aria-labelledby="lang-label">
+          <span id="lang-label" class="lang-label">Язык</span>
+          <button type="button" class="lang-btn" data-lang="ru" aria-pressed="true">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" class="lang-btn" data-lang="sr" aria-pressed="false">SR</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="wrap">
+      <section class="hero" aria-labelledby="name">
+        <div class="light-well">
+          <img
+            class="portrait"
+            src="./assets/portrait.jpg"
+            width="640"
+            height="640"
+            alt="Valentin Kazantsev, chiaroscuro portrait"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero-copy">
+          <p class="kicker" id="kicker">VK · CARD</p>
+          <h1 class="hero-name" id="name">Валентин Казанцев</h1>
+          <p class="hero-role" id="role">Junior BI · агенты · автоматизация</p>
+          <p class="hero-line" id="line">
+            Сырые данные → чистый отчёт. Бриф → бот. Меньше простыни, больше сдачи.
+          </p>
+          <span class="entity" id="entity">РФ: самозанятый</span>
+          <div class="cta-row">
+            <a class="btn btn-primary" id="cta" href="https://t.me/valdk_corp">Написать в Telegram</a>
+            <a class="btn btn-ghost" id="cta-kwork" href="https://kwork.ru/user/valdk">Kwork</a>
+            <a class="btn btn-ghost" id="cta-gh" hidden href="https://github.com/ValDagon">GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="stats" id="stats"></div>
+
+      <section id="stack">
+        <h2 class="sec-h" id="h-stack">Стек</h2>
+        <div class="stack-groups" id="stack-groups"></div>
+      </section>
+
+      <section id="gigs">
+        <h2 class="sec-h" id="h-gigs">Задачи</h2>
+        <div class="gigs" id="gigs-list"></div>
+      </section>
+
+      <section id="path">
+        <h2 class="sec-h" id="h-cv">Путь</h2>
+        <div class="path-list" id="path-list"></div>
+      </section>
+
+      <section id="work">
+        <h2 class="sec-h" id="h-work">Работы</h2>
+        <div class="work-grid" id="work-list"></div>
+      </section>
+
+      <section id="contact">
+        <h2 class="sec-h" id="h-contact">Связь</h2>
+        <p class="contact-intro" id="contact-intro"></p>
+        <ul class="contact-list" id="contact-list"></ul>
+        <p class="legal" id="legal">
+          Заказы на территории РФ выполняю как самозанятый. Биржи: Kwork, FL.ru, Профи.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap" id="foot-note">Карточка · GitHub Pages · без трекеров</div>
+    </footer>
+
+    <noscript>
+      <div class="wrap noscript">
+        JavaScript выключен. Telegram:
+        <a href="https://t.me/valdk_corp">@valdk_corp</a>
+        · email:
+        <a href="mailto:valrus56@yandex.ru">valrus56@yandex.ru</a>
+        · Kwork:
+        <a href="https://kwork.ru/user/valdk">valdk</a>
+      </div>
+    </noscript>
+
+    <script src="./js/data.js" defer></script>
+    <script src="./js/app.js" defer></script>
+  </body>
+</html>

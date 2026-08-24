@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="VK">
+  <rect width="32" height="32" fill="#0B0A09"/>
+  <rect x="17" width="15" height="32" fill="#E4A574"/>
+  <rect x="17" width="3" height="32" fill="#0B0A09" opacity="0.35"/>
+</svg>

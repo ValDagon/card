@@ -1,0 +1,14 @@
+---
+description: Web UI must be distinctive, responsive, and stable. Use Crystal frontend ritual.
+globs: "**/*.{html,css,scss,tsx,jsx,vue,svelte,php}"
+alwaysApply: false
+---
+
+# Web UI
+
+- Follow skill `crystal-frontend-ui` (reads `frontend-design` + `web-design-guidelines`).
+- Mobile-first. Do not ship until 375px layout holds.
+- This repo is static HTML/CSS/JS for GitHub Pages. Do not add Next.js or a fat bundler unless Pages deploy stays one-command.
+- Asset paths must be relative (`./assets/…`) so the site works at `/card/`.
+- Do not commit `node_modules/`.
+- Before done: open the page (browser MCP if available) and click the primary CTA.
