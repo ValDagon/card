@@ -20,6 +20,14 @@
  * --color-muted/--color-steel/--color-accent were all raised in tokens.css v3
  * specifically to fix this while keeping the reference's rounded, glowing,
  * bold-typographic language.
+ *
+ * v4 pass · human said "copy the palette" — the v3 decision to keep the warm
+ * amber accent (portrait-tied) is retired. tokens.css now carries the
+ * reference's actual colours, extracted via computed-style, not eyeballed:
+ * neutral near-black surfaces (was warm hue-58 tinted), accent hue ~231 (their
+ * stat numerals / "In Progress" status), good-status hue ~163 (their
+ * "Completed" pill). The contrast fix from v3 stays: --color-muted/--color-steel
+ * remain above the reference's own ~70%L body colour.
  */
 
 *,
