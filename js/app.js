@@ -115,6 +115,31 @@
       ctaGh.setAttribute("href", D.github);
     }
 
+    var cta2 = document.getElementById("cta2");
+    cta2.textContent = t(D.ui.cta);
+    cta2.setAttribute("href", D.telegram);
+
+    var ctaK2 = document.getElementById("cta-kwork2");
+    if (L === "ru") {
+      ctaK2.hidden = false;
+      ctaK2.textContent = t(D.ui.ctaKwork);
+      ctaK2.setAttribute("href", D.kwork);
+    } else {
+      ctaK2.hidden = true;
+    }
+
+    var ctaGh2 = document.getElementById("cta-gh2");
+    if (L === "ru") {
+      ctaGh2.hidden = true;
+    } else {
+      ctaGh2.hidden = false;
+      ctaGh2.textContent = "GitHub";
+      ctaGh2.setAttribute("href", D.github);
+    }
+
+    document.getElementById("outro-title").textContent = t(D.ui.outroTitle);
+    document.getElementById("outro-line").textContent = t(D.ui.outroLine);
+
     var stats = document.getElementById("stats");
     stats.replaceChildren();
     D.stats.forEach(function (s) {
@@ -162,8 +187,9 @@
 
     var path = document.getElementById("path-list");
     path.replaceChildren();
-    D.path.forEach(function (p) {
+    D.path.forEach(function (p, i) {
       var row = el("article", "path-row");
+      if (i === 0) row.setAttribute("data-now", t(D.ui.now));
       var when = el("time", "path-when", t(p.when));
       when.translate = false;
       row.appendChild(when);

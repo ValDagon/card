@@ -1,18 +1,23 @@
-/* Hallmark tokens · card v2 · anchor hue 58 (warm amber, matched to portrait light)
- * Hand-tuned OKLCH construction preserving the v1 identity — not a catalog swap.
+/* Hallmark tokens · card v3 · anchor hue 58 (warm amber, matched to portrait light)
+ * v3 = ZeroClaw-DNA pass (https://www.zeroclawlabs.ai/, study-mode, human-directed
+ * copy): rounded-xl card family + status colours added; --color-muted and
+ * --color-steel lightness raised from v2 (was 64%/61%) specifically because the
+ * human flagged the reference's own body text as too low-contrast to copy as-is.
  */
 :root {
   /* colour — dark surface, warm anchor */
   --color-void: oklch(11% 0.016 58);
   --color-panel: oklch(15% 0.018 58);
   --color-panel-2: oklch(19% 0.02 58);
-  --color-ink: oklch(93% 0.014 70);
-  --color-muted: oklch(64% 0.02 65);
-  --color-steel: oklch(61% 0.025 235);
-  --color-rule: oklch(26% 0.015 58);
-  --color-accent: oklch(78% 0.1 58);
-  --color-accent-2: oklch(68% 0.075 55);
-  --color-focus: oklch(84% 0.09 62);
+  --color-ink: oklch(96% 0.008 70);
+  --color-muted: oklch(80% 0.02 65);
+  --color-steel: oklch(74% 0.03 235);
+  --color-rule: oklch(28% 0.016 58);
+  --color-accent: oklch(80% 0.13 58);
+  --color-accent-2: oklch(72% 0.09 55);
+  --color-focus: oklch(86% 0.1 62);
+  --color-good: oklch(76% 0.14 150);
+  --color-good-dim: oklch(30% 0.03 150);
 
   /* type */
   --font-display: Syne, ui-sans-serif, sans-serif;
@@ -29,6 +34,12 @@
   --space-xl: 2.5rem;
   --space-2xl: 4rem;
   --space-3xl: 6rem;
+
+  /* radius — rounded-xl card family, borrowed from the ZeroClaw study */
+  --radius-sm: 0.65rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 999px;
 
   /* motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
