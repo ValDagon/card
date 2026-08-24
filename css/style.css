@@ -1,21 +1,13 @@
-:root {
-  --void: #0b0a09;
-  --panel: #141210;
-  --ember: #e4a574;
-  --brass: #b8956a;
-  --mist: #e8e0d6;
-  --mute: #8a8278;
-  --steel: #7a8b96;
-  --line: #2a2622;
-  --focus: #f0c9a0;
-  --safe-t: env(safe-area-inset-top, 0px);
-  --safe-b: env(safe-area-inset-bottom, 0px);
-  --safe-l: env(safe-area-inset-left, 0px);
-  --safe-r: env(safe-area-inset-right, 0px);
-  --pad: clamp(1rem, 4vw, 2rem);
-  --max: 68rem;
-  color-scheme: dark;
-}
+@import url("./tokens.css");
+
+/* Hallmark · macrostructure: Portfolio Grid (18, adapted) · genre: modern-minimal
+ * theme: custom-tuned (anchor hue 58, warm amber — kept from portrait, diverges from
+ * catalog Coral/Cobalt on purpose) · nav: N5 Floating-pill (adapted, lang-switch
+ * always visible) · footer: Ft2 Inline single line
+ * studied: yes · DNA-source: url (https://takethe.space/) — borrowed: kicker pill,
+ * bordered stat strip, numbered process rhythm (applied to Path). Rejected:
+ * gradient headline text, centred hero over radial glow (see anti-patterns.md).
+ */
 
 *,
 *::before,
@@ -24,34 +16,35 @@
 }
 
 html {
-  background: var(--void);
+  background: var(--color-void);
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   min-height: 100dvh;
-  font-family: Figtree, "Segoe UI", sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.5;
-  color: var(--mist);
-  background: var(--void);
+  color: var(--color-ink);
+  background: var(--color-void);
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgb(228 165 116 / 0.18);
+  overflow-x: clip;
+  -webkit-tap-highlight-color: color-mix(in oklch, var(--color-accent) 18%, transparent);
 }
 
-body::before {
-  content: "";
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background:
-    linear-gradient(90deg, transparent 0 46%, rgb(228 165 116 / 0.07) 50%, transparent 54%),
-    radial-gradient(120% 80% at 100% 0%, rgb(228 165 116 / 0.12), transparent 42%);
-  mix-blend-mode: screen;
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    background-image: radial-gradient(
+      60rem 40rem at 100% -10%,
+      color-mix(in oklch, var(--color-accent) 7%, transparent),
+      transparent 60%
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
 }
 
 img {
@@ -61,13 +54,13 @@ img {
 }
 
 a {
-  color: var(--ember);
+  color: var(--color-accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
 }
 
 a:hover {
-  color: var(--mist);
+  color: var(--color-ink);
 }
 
 :focus {
@@ -75,20 +68,21 @@ a:hover {
 }
 
 :focus-visible {
-  outline: 2px solid var(--focus);
+  outline: 2px solid var(--color-focus);
   outline-offset: 3px;
 }
 
 .skip {
-  position: absolute;
+  position: fixed;
+  z-index: var(--z-toast);
   left: var(--pad);
-  top: calc(0.5rem + var(--safe-t));
-  z-index: 20;
-  padding: 0.5rem 0.75rem;
-  background: var(--ember);
-  color: var(--void);
+  top: calc(var(--space-sm) + var(--safe-t));
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-accent);
+  color: var(--color-void);
   font-weight: 600;
   transform: translateY(-160%);
+  transition: transform var(--dur-short) var(--ease-out);
 }
 
 .skip:focus {
@@ -97,61 +91,89 @@ a:hover {
 
 .wrap {
   position: relative;
-  z-index: 1;
+  z-index: var(--z-base);
   width: min(100%, var(--max));
   margin-inline: auto;
   padding-inline: calc(var(--pad) + var(--safe-l)) calc(var(--pad) + var(--safe-r));
 }
 
+/* ---------- Nav: N5 floating-pill, adapted ---------- */
+/* Language switch stays visible at every width — a hard requirement, not a
+ * cosmetic choice — so N5's default "drop the link row on mobile" becomes
+ * "let the link row scroll" instead of "hide it". */
+
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  padding-top: var(--safe-t);
-  background: rgb(11 10 9 / 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
+  z-index: var(--z-sticky);
+  padding: calc(var(--space-sm) + var(--safe-t)) 0 var(--space-sm);
 }
 
 .header-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem 1rem;
-  padding-block: 0.7rem;
+  gap: var(--space-sm) var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-rule);
+  border-radius: 1.25rem;
+  background: color-mix(in oklch, var(--color-void) 86%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .header-inner {
+    background: var(--color-void);
+  }
 }
 
 .mark {
-  font-family: Syne, sans-serif;
-  font-weight: 800;
+  flex: none;
+  font-family: var(--font-outlier);
+  font-weight: 600;
   letter-spacing: 0.14em;
   font-size: 0.75rem;
-  color: var(--ember);
+  color: var(--color-accent);
 }
 
 .nav-main {
-  display: none;
-  gap: 0.9rem;
+  order: 3;
+  flex-basis: 100%;
+  display: flex;
+  gap: var(--space-md);
   min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-block: var(--space-3xs);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.nav-main::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-main a {
-  color: var(--mute);
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  white-space: nowrap;
+  color: var(--color-muted);
   text-decoration: none;
   font-size: 0.85rem;
 }
 
 .nav-main a:hover,
 .nav-main a:focus-visible {
-  color: var(--mist);
+  color: var(--color-ink);
 }
 
 .lang {
   margin-left: auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(2.75rem, 1fr));
-  gap: 0.25rem;
-  min-width: min(100%, 11.5rem);
+  grid-auto-flow: column;
+  gap: var(--space-3xs);
 }
 
 .lang-label {
@@ -164,38 +186,44 @@ a:hover {
 
 .lang-btn {
   appearance: none;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  color: var(--mute);
+  border: 1px solid var(--color-rule);
+  border-radius: 999px;
+  background: var(--color-panel);
+  color: var(--color-muted);
   font: inherit;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-outlier);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   min-height: 2.75rem;
-  padding: 0 0.4rem;
+  min-width: 2.75rem;
+  padding: 0 var(--space-sm);
   cursor: pointer;
+  transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out),
+    background var(--dur-short) var(--ease-out);
 }
 
 .lang-btn.is-on {
-  background: var(--ember);
-  color: var(--void);
-  border-color: var(--ember);
+  background: var(--color-accent);
+  color: var(--color-void);
+  border-color: var(--color-accent);
   font-weight: 600;
 }
 
 .lang-btn:hover:not(.is-on) {
-  border-color: var(--brass);
-  color: var(--mist);
+  border-color: var(--color-accent-2);
+  color: var(--color-ink);
 }
 
 main {
-  padding-bottom: calc(4rem + var(--safe-b));
+  padding-bottom: calc(var(--space-3xl) + var(--safe-b));
 }
+
+/* ---------- Hero — left-biased, no centred-mesh default ---------- */
 
 .hero {
   display: grid;
-  gap: 1.5rem;
-  padding-block: 1.5rem 2.25rem;
+  gap: var(--space-lg);
+  padding-block: var(--space-xl) var(--space-2xl);
 }
 
 .light-well {
@@ -208,20 +236,20 @@ main {
   content: "";
   position: absolute;
   inset: -8% -18% -8% 55%;
-  background: linear-gradient(90deg, transparent, rgb(228 165 116 / 0.28));
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 28%, transparent));
   pointer-events: none;
 }
 
 .portrait {
   position: relative;
-  z-index: 1;
+  z-index: var(--z-base);
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   object-position: 62% 18%;
   border-radius: 50%;
-  border: 1px solid rgb(228 165 116 / 0.35);
-  box-shadow: 18px 0 48px rgb(228 165 116 / 0.22);
+  border: 1px solid color-mix(in oklch, var(--color-accent) 35%, transparent);
+  box-shadow: 18px 0 48px color-mix(in oklch, var(--color-accent) 22%, transparent);
 }
 
 .hero-copy {
@@ -229,137 +257,201 @@ main {
 }
 
 .kicker {
-  margin: 0 0 0.4rem;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  color: var(--brass);
+  display: inline-block;
+  margin: 0 0 var(--space-sm);
+  padding: var(--space-3xs) var(--space-sm);
+  border: 1px solid var(--color-rule);
+  border-radius: 999px;
+  font-family: var(--font-outlier);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--color-accent-2);
 }
 
 h1,
 h2,
 .hero-name {
-  font-family: Syne, sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
+  font-style: normal;
   letter-spacing: -0.03em;
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 .hero-name {
   margin: 0;
-  font-size: clamp(2rem, 8vw, 3.4rem);
-  line-height: 0.95;
+  min-width: 0;
+  font-size: clamp(2rem, 7vw + 0.5rem, 3.4rem);
+  line-height: 0.98;
 }
 
 .hero-role {
   margin: 0.7rem 0 0;
-  color: var(--steel);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--color-steel);
+  font-family: var(--font-outlier);
   font-size: 0.92rem;
 }
 
 .hero-line {
-  margin: 0.9rem 0 0;
+  margin: var(--space-sm) 0 0;
   max-width: 36rem;
-  color: var(--mute);
+  color: var(--color-muted);
   text-wrap: pretty;
 }
 
 .entity {
   display: inline-block;
-  margin-top: 0.9rem;
-  padding: 0.28rem 0.55rem;
-  border: 1px solid var(--line);
+  margin-top: var(--space-sm);
+  padding: 0.28rem var(--space-sm);
+  border: 1px solid var(--color-rule);
   font-size: 0.78rem;
-  color: var(--brass);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--color-accent-2);
+  font-family: var(--font-outlier);
 }
 
 .cta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1.15rem;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
   min-height: 2.85rem;
   min-width: 2.85rem;
   padding: 0.55rem 1.05rem;
-  border: 1px solid var(--ember);
+  border: 1px solid var(--color-accent);
   font: inherit;
   font-weight: 600;
   text-decoration: none;
+  transition: background var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out),
+    border-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+}
+
+.btn:active {
+  transform: translateY(1px);
 }
 
 .btn-primary {
-  background: var(--ember);
-  color: var(--void);
+  background: var(--color-accent);
+  color: var(--color-void);
 }
 
 .btn-primary:hover {
-  background: var(--mist);
-  border-color: var(--mist);
-  color: var(--void);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-void);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--ember);
+  color: var(--color-accent);
 }
 
 .btn-ghost:hover {
-  background: var(--panel);
-  color: var(--mist);
+  background: var(--color-panel);
+  color: var(--color-ink);
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > * {
+    opacity: 0;
+    animation: reveal var(--dur-long) var(--ease-out) forwards;
+  }
+  .hero-copy > *:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .hero-copy > *:nth-child(2) {
+    animation-delay: 60ms;
+  }
+  .hero-copy > *:nth-child(3) {
+    animation-delay: 120ms;
+  }
+  .hero-copy > *:nth-child(4) {
+    animation-delay: 180ms;
+  }
+  .hero-copy > *:nth-child(5) {
+    animation-delay: 240ms;
+  }
+  .hero-copy > *:nth-child(6) {
+    animation-delay: 300ms;
+  }
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* ---------- Stats — bordered console strip, not a plain grid (takethe.space DNA,
+   without the icon-tile / gradient tells) ---------- */
 
 .stats {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-  padding: 0 0 2rem;
-  border-top: 1px solid var(--line);
+  border: 1px solid var(--color-rule);
+  background: var(--color-panel);
 }
 
 .stat {
   min-width: 0;
-  padding-top: 0.9rem;
+  padding: var(--space-md) var(--space-md);
+  border-block-start: 1px solid var(--color-rule);
+}
+
+.stat:nth-child(-n + 2) {
+  border-block-start: none;
+}
+
+.stat:nth-child(odd) {
+  border-inline-end: 1px solid var(--color-rule);
 }
 
 .stat-v {
   display: block;
-  font-family: Syne, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.35rem;
   font-variant-numeric: tabular-nums;
-  color: var(--ember);
+  color: var(--color-accent);
 }
 
 .stat-l {
   display: block;
-  color: var(--mute);
+  color: var(--color-muted);
   font-size: 0.82rem;
 }
 
 section {
-  padding-block: 1.75rem;
-  border-top: 1px solid var(--line);
+  padding-block: var(--space-xl) var(--space-lg);
+  border-top: 1px solid var(--color-rule);
+}
+
+#stack {
+  padding-top: var(--space-2xl);
 }
 
 .sec-h {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-md);
   font-size: 0.78rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--brass);
-  scroll-margin-top: 5.5rem;
+  color: var(--color-accent-2);
+  scroll-margin-top: 6rem;
 }
 
 .stack-groups {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-md);
 }
 
 .stack-h {
@@ -370,7 +462,7 @@ section {
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: var(--space-2xs);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -379,85 +471,128 @@ section {
 .chip {
   min-width: 0;
   max-width: 100%;
-  padding: 0.22rem 0.5rem;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  padding: var(--space-3xs) var(--space-xs);
+  border: 1px solid var(--color-rule);
+  background: var(--color-panel);
+  font-family: var(--font-outlier);
   font-size: 0.72rem;
-  color: var(--mist);
+  color: var(--color-ink);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+/* ---------- Cards — hairline all-round + a small accent mark beside the
+   heading, replacing the v1 thick-left-stripe (named anti-pattern: "the
+   side-stripe card", 2018-SaaS-AI tell). ---------- */
+
 .gigs,
 .work-grid {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--space-md);
 }
 
 .gig,
-.work,
-.path-row {
+.work {
   min-width: 0;
-  padding: 0.9rem 0.85rem;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--ember);
+  padding: var(--space-md);
+  background: var(--color-panel);
+  border: 1px solid var(--color-rule);
 }
 
 .gig-top {
   display: flex;
-  gap: 0.65rem;
+  gap: var(--space-sm);
   align-items: baseline;
   min-width: 0;
 }
 
 .gig-code {
   flex: none;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-outlier);
   font-size: 0.7rem;
-  color: var(--steel);
+  color: var(--color-steel);
 }
 
 .gig-title,
-.work-title,
-.path-role {
+.work-title {
   margin: 0;
-  font-family: Syne, sans-serif;
-  font-size: 1.05rem;
   min-width: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.work-title::before {
+  content: "";
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  margin-inline-end: 0.5em;
+  background: var(--color-accent);
+  vertical-align: middle;
 }
 
 .gig-out,
 .work-blurb,
-.path-note,
 .contact-intro {
-  margin: 0.4rem 0 0.65rem;
-  color: var(--mute);
+  margin: 0.4rem 0 var(--space-sm);
+  color: var(--color-muted);
   overflow-wrap: anywhere;
 }
 
+/* ---------- Path — genuinely ordinal content, numbered via CSS counters
+   (borrowed rhythm cue from takethe.space's 01-06 process; legitimate here
+   because a career timeline IS sequential, unlike a decorative eyebrow). ---------- */
+
 .path-list {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--space-md);
+  counter-reset: path;
 }
 
 .path-row {
+  counter-increment: path;
+  min-width: 0;
   display: grid;
   gap: 0.35rem;
+  padding: var(--space-md);
+  background: var(--color-panel);
+  border: 1px solid var(--color-rule);
+  position: relative;
+}
+
+.path-row::before {
+  content: counter(path, decimal-leading-zero);
+  font-family: var(--font-outlier);
+  font-size: 0.72rem;
+  color: var(--color-accent-2);
+  letter-spacing: 0.08em;
 }
 
 .path-when {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-outlier);
   font-size: 0.75rem;
-  color: var(--ember);
+  color: var(--color-accent);
+}
+
+.path-role {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  min-width: 0;
 }
 
 .path-org {
   margin: 0.15rem 0 0;
-  color: var(--steel);
+  color: var(--color-steel);
   font-size: 0.88rem;
+}
+
+.path-note {
+  margin: 0.4rem 0 0;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
 }
 
 .work-foot {
@@ -465,14 +600,13 @@ section {
   font-size: 0.85rem;
 }
 
-.work-private,
-.is-gate .contact-hint {
-  color: var(--steel);
+.work-private {
+  color: var(--color-steel);
 }
 
 .contact-list {
   display: grid;
-  gap: 0.45rem;
+  gap: var(--space-xs);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -482,10 +616,10 @@ section {
   min-width: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0.8rem;
-  padding: 0.7rem 0.8rem;
-  border: 1px solid var(--line);
-  background: var(--panel);
+  gap: 0.35rem var(--space-md);
+  padding: 0.7rem var(--space-md);
+  border: 1px solid var(--color-rule);
+  background: var(--color-panel);
 }
 
 .contact-item.is-gate {
@@ -496,58 +630,74 @@ section {
 .contact-link {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0.8rem;
+  gap: 0.35rem var(--space-md);
   width: 100%;
   text-decoration: none;
   color: inherit;
+  transition: color var(--dur-short) var(--ease-out);
 }
 
 .contact-link:hover .contact-label {
-  color: var(--ember);
+  color: var(--color-accent);
 }
 
 .contact-label {
   font-weight: 600;
 }
 
+.is-gate .contact-hint {
+  color: var(--color-steel);
+}
+
 .contact-hint {
-  color: var(--mute);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--color-muted);
+  font-family: var(--font-outlier);
   font-size: 0.82rem;
   overflow-wrap: anywhere;
 }
 
 .legal {
-  margin: 1.2rem 0 0;
-  color: var(--mute);
+  margin: var(--space-lg) 0 0;
+  color: var(--color-muted);
   font-size: 0.92rem;
   text-wrap: pretty;
 }
 
+/* ---------- Footer — Ft2 inline single line ---------- */
+
 .site-footer {
-  border-top: 1px solid var(--line);
-  padding: 1.2rem 0 calc(1.4rem + var(--safe-b));
-  color: var(--mute);
+  border-top: 1px solid var(--color-rule);
+  padding: var(--space-lg) 0 calc(var(--space-lg) + var(--safe-b));
+  color: var(--color-muted);
   font-size: 0.8rem;
 }
 
 .noscript {
-  margin: 1rem 0;
-  padding: 0.8rem;
-  border: 1px dashed var(--brass);
-  color: var(--mist);
+  margin: var(--space-md) 0;
+  padding: var(--space-sm);
+  border: 1px dashed var(--color-accent-2);
+  color: var(--color-ink);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 45rem) {
+  .header-inner {
+    border-radius: 999px;
+    flex-wrap: nowrap;
+  }
+
   .nav-main {
-    display: flex;
+    order: initial;
+    flex-basis: auto;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .hero {
     grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
     align-items: center;
-    gap: 2.5rem;
-    padding-block: 2.4rem 2.8rem;
+    gap: var(--space-2xl);
+    padding-block: var(--space-2xl) var(--space-3xl);
   }
 
   .light-well {
@@ -559,19 +709,46 @@ section {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .stack-groups,
-  .gigs,
+  .stat:nth-child(-n + 4) {
+    border-block-start: none;
+  }
+
+  .stat:nth-child(n + 5) {
+    border-block-start: 1px solid var(--color-rule);
+  }
+
+  .stat:nth-child(odd) {
+    border-inline-end: none;
+  }
+
+  .stat:not(:first-child) {
+    border-inline-start: 1px solid var(--color-rule);
+  }
+
+  .stack-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gigs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .work-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .path-row {
-    grid-template-columns: 6.5rem minmax(0, 1fr);
+    grid-template-columns: 2.5rem 6.5rem minmax(0, 1fr);
     align-items: start;
+    padding-block: var(--space-sm);
+  }
+
+  .path-row::before {
+    padding-top: 0.15rem;
   }
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 68rem) {
   .work-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -582,8 +759,8 @@ section {
     scroll-behavior: auto;
   }
 
-  body::before {
-    display: none;
+  body {
+    background-image: none;
   }
 
   .portrait {
