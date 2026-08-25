@@ -302,14 +302,14 @@ window.SITE = {
       url: null,
       stack: ["pandas", "ClickHouse", "Excel", "FastAPI"],
       title: {
-        ru: "Кейс BI",
-        en: "BI case",
-        sr: "BI slučaj",
+        ru: "BI · ClickHouse",
+        en: "BI · ClickHouse",
+        sr: "BI · ClickHouse",
       },
       blurb: {
-        ru: "Витрина аналитики: ClickHouse (Docker + Cloud) + Excel.",
-        en: "Analytics case: ClickHouse (Docker + Cloud) + Excel.",
-        sr: "Analitički slučaj: ClickHouse (Docker + Cloud) + Excel.",
+        ru: "Аналитика: ClickHouse (Docker + Cloud) + Excel.",
+        en: "Analytics: ClickHouse (Docker + Cloud) + Excel.",
+        sr: "Analitika: ClickHouse (Docker + Cloud) + Excel.",
       },
     },
     {
@@ -352,9 +352,9 @@ window.SITE = {
         sr: "AI Comic Translator",
       },
       blurb: {
-        ru: "Портфолио на Google Cloud: перевод комиксов. Не текущий заказ.",
-        en: "Google Cloud portfolio: comic translation. Parked, not a live gig.",
-        sr: "Portfolio na Google Cloud: prevod stripova. Nije aktivan nalog.",
+        ru: "Перевод комиксов на Google Cloud: vision + LLM.",
+        en: "Comic translation on Google Cloud: vision + LLM pipeline.",
+        sr: "Prevod stripova na Google Cloud: vision + LLM.",
       },
     },
     {
