@@ -64,14 +64,9 @@ window.SITE = {
       sr: "Valentin Kazancev",
     },
     role: {
-      ru: "Junior BI · агенты · автоматизация",
-      en: "Junior BI · agents · automation",
-      sr: "Junior BI · agenti · automatizacija",
-    },
-    line: {
-      ru: "Сырые данные → чистый отчёт. Бриф → бот. Меньше простыни, больше сдачи.",
-      en: "Raw data → clean report. Brief → bot. Less wall of text, more shipped work.",
-      sr: "Sirovi podaci → čist izveštaj. Brif → bot. Manje zida teksta, više isporuke.",
+      ru: "BI · агенты · автоматизация",
+      en: "BI · agents · automation",
+      sr: "BI · agenti · automatizacija",
     },
     entity: {
       ru: "РФ: самозанятый",
@@ -91,7 +86,7 @@ window.SITE = {
     },
     {
       value: "RU EN SR",
-      label: { ru: "локали", en: "locales", sr: "lokali" },
+      label: { ru: "языки", en: "languages", sr: "jezici" },
     },
     {
       value: "40 / 10",

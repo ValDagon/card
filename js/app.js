@@ -90,7 +90,6 @@
     document.getElementById("kicker").textContent = t(D.hero.kicker);
     document.getElementById("name").textContent = t(D.hero.name);
     document.getElementById("role").textContent = t(D.hero.role);
-    document.getElementById("line").textContent = t(D.hero.line);
     document.getElementById("entity").textContent = t(D.hero.entity);
 
     var cta = document.getElementById("cta");
