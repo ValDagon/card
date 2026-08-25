@@ -101,7 +101,6 @@
       a.textContent = t(D.ui[a.getAttribute("data-nav")]);
     });
 
-    document.getElementById("kicker").textContent = t(D.hero.kicker);
     document.getElementById("name").textContent = t(D.hero.name);
     document.getElementById("role").textContent = t(D.hero.role);
     document.getElementById("entity").textContent = t(D.hero.entity);

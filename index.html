@@ -2,6 +2,13 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
+    <script>
+      (function () {
+        if (location.pathname === "/card") {
+          location.replace("/card/" + location.search + location.hash);
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0B0A09" />
     <meta name="color-scheme" content="dark" />
@@ -62,7 +69,7 @@
         <div class="light-well">
           <img
             class="portrait"
-            src="./assets/portrait.jpg"
+            src="./assets/portrait.jpg?v=1"
             width="640"
             height="640"
             alt="Valentin Kazantsev, chiaroscuro portrait"
@@ -70,7 +77,6 @@
           />
         </div>
         <div class="hero-copy">
-          <p class="kicker" id="kicker">VK · CARD</p>
           <h1 class="hero-name" id="name">Валентин Казанцев</h1>
           <p class="hero-role" id="role">BI · агенты · автоматизация</p>
           <span class="entity" id="entity">РФ: самозанятый</span>

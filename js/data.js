@@ -3,7 +3,7 @@
    Do not invent URLs — use placeholder: true instead. */
 window.SITE = {
   siteUrl: "https://valdagon.github.io/card/",
-  photo: "./assets/portrait.jpg",
+  photo: "./assets/portrait.jpg?v=1",
   langs: ["ru", "en", "sr"],
   telegram: "https://t.me/valdk_corp",
   github: "https://github.com/ValDagon",
@@ -59,7 +59,6 @@ window.SITE = {
   },
 
   hero: {
-    kicker: { ru: "VK · CARD", en: "VK · CARD", sr: "VK · CARD" },
     name: {
       ru: "Валентин Казанцев",
       en: "Valentin Kazantsev",
