@@ -11,8 +11,9 @@
 | | |
 |---|---|
 | **Live** | Static HTML/CSS/JS · GitHub Pages user site · https://valdagon.github.io/ |
+| **Ship** | `git push origin main && git push user-site main` (`ValDagon/card` + `ValDagon.github.io`) |
 | **Next** | Человек заполняет гейты (FL / Профи / Upwork URL). Правки копи — `js/data.js`. |
-| **Проверка** | Открыть `index.html` (или `python3 -m http.server 4173`) · 375px + десктоп · RU/EN/SR |
+| **Проверка** | `python3 -m http.server 4173` (не `file://`) · 375px + десктоп · RU/EN/SR |
 
 ## 1. Миссия
 

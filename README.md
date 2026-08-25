@@ -29,6 +29,10 @@ Canonical: [ValDagon/ValDagon.github.io](https://github.com/ValDagon/ValDagon.gi
 
 Mirror + redirect: [ValDagon/card](https://github.com/ValDagon/card) still publishes at `/card/` and sends visitors to `/`.
 
+```bash
+git push origin main && git push user-site main
+```
+
 ## Edit copy / add a project
 
 All user-visible strings live in [`js/data.js`](js/data.js).
