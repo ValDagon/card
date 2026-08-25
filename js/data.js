@@ -114,11 +114,25 @@ window.SITE = {
     {
       id: "ai",
       title: { ru: "AI", en: "AI", sr: "AI" },
-      chips: ["Cursor", "OpenRouter", "агенты", "vision"],
+      chips: ["Cursor", "OpenRouter", "агенты", "vision", "Ollama", "Swift"],
     },
   ],
 
   gigs: [
+    {
+      code: "MAC·AG",
+      stack: ["Swift 6", "Ollama", "Telegram"],
+      title: {
+        ru: "macOS AI-агент",
+        en: "macOS AI agent",
+        sr: "macOS AI agent",
+      },
+      outcome: {
+        ru: "Headless демон: Telegram, локальная Ollama, SQLite, Keychain.",
+        en: "Headless daemon: Telegram, local Ollama, SQLite, Keychain.",
+        sr: "Headless demon: Telegram, lokalni Ollama, SQLite, Keychain.",
+      },
+    },
     {
       code: "TG·HR",
       stack: ["aiogram", "Sheets"],
@@ -251,6 +265,21 @@ window.SITE = {
   ],
 
   projects: [
+    {
+      id: "swift-agent",
+      url: null,
+      stack: ["Swift 6", "Telegram", "Ollama", "SQLite", "GRDB"],
+      title: {
+        ru: "swift-agent",
+        en: "swift-agent",
+        sr: "swift-agent",
+      },
+      blurb: {
+        ru: "Нативный macOS-демон: Telegram → локальная Ollama, память SQLite, Keychain. В разработке.",
+        en: "Native macOS daemon: Telegram → local Ollama, SQLite memory, Keychain. In development.",
+        sr: "Nativni macOS demon: Telegram → lokalni Ollama, SQLite memorija, Keychain. U razvoju.",
+      },
+    },
     {
       id: "relomap",
       url: null,

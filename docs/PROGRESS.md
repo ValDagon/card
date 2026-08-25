@@ -14,5 +14,6 @@
 | 2026-08-24 | **Live on GitHub Pages.** Public repo `ValDagon/card`, `main` `/`. URL https://valdagon.github.io/card/ HTTP 200. Copy in `js/data.js`. Human gates: FL / Profi / Upwork URLs. |
 | 2026-08-25 | **Empty sections + Relomap private.** Safari empty Стек/Задачи/Путь/Работы: last commit dropped `#kicker` but left `app.js?v=8`, so Safari kept the old JS that crashed on `getElementById("kicker")`. GitHub visible on RU: `.btn { display:inline-flex }` overrode `[hidden]`. Fixes: Relomap `url: null`; JS cache-bust `?v=9`; `[hidden]{display:none!important}`; null-safe `render()`. Pushed to Pages. |
 | 2026-08-25 | **User site + portrait.** `/card/` is GitHub project-Pages URL for repo `card`; root `https://valdagon.github.io/` needs `ValDagon.github.io`. Created that public repo, Pages `/` from `main`. Canonical URLs + assets `/assets/portrait.jpg?v=2`. Crop `object-position: 50% 32%`. `/card/` JS-redirects to `/`. Relomap still `url: null`. |
+| 2026-08-25 | **swift-agent on card.** Work section + gig MAC·AG; AI stack chips Ollama/Swift. Private repo label. data.js v11. |
 
 New rows go **at the end**.
