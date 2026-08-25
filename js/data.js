@@ -120,20 +120,6 @@ window.SITE = {
 
   gigs: [
     {
-      code: "MAC·AG",
-      stack: ["Swift 6", "Ollama", "Telegram"],
-      title: {
-        ru: "macOS AI-агент",
-        en: "macOS AI agent",
-        sr: "macOS AI agent",
-      },
-      outcome: {
-        ru: "Headless демон: Telegram, локальная Ollama, SQLite, Keychain.",
-        en: "Headless daemon: Telegram, local Ollama, SQLite, Keychain.",
-        sr: "Headless demon: Telegram, lokalni Ollama, SQLite, Keychain.",
-      },
-    },
-    {
       code: "TG·HR",
       stack: ["aiogram", "Sheets"],
       title: {
@@ -267,7 +253,7 @@ window.SITE = {
   projects: [
     {
       id: "swift-agent",
-      url: null,
+      url: "https://github.com/ValDagon/swift-agent",
       stack: ["Swift 6", "Telegram", "Ollama", "SQLite", "GRDB"],
       title: {
         ru: "swift-agent",
@@ -275,9 +261,9 @@ window.SITE = {
         sr: "swift-agent",
       },
       blurb: {
-        ru: "Нативный macOS-демон: Telegram → локальная Ollama, память SQLite, Keychain. В разработке.",
-        en: "Native macOS daemon: Telegram → local Ollama, SQLite memory, Keychain. In development.",
-        sr: "Nativni macOS demon: Telegram → lokalni Ollama, SQLite memorija, Keychain. U razvoju.",
+        ru: "Личный open-source: headless macOS-демон, Telegram → локальная Ollama, SQLite, Keychain.",
+        en: "Personal open-source: headless macOS daemon, Telegram → local Ollama, SQLite, Keychain.",
+        sr: "Lični open-source: headless macOS demon, Telegram → lokalni Ollama, SQLite, Keychain.",
       },
     },
     {
