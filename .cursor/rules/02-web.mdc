@@ -9,6 +9,6 @@ alwaysApply: false
 - Follow skill `crystal-frontend-ui` (reads `frontend-design` + `web-design-guidelines`).
 - Mobile-first. Do not ship until 375px layout holds.
 - This repo is static HTML/CSS/JS for GitHub Pages. Do not add Next.js or a fat bundler unless Pages deploy stays one-command.
-- Asset paths must be relative (`./assets/…`) so the site works at `/card/`.
+- Asset paths are root-absolute (`/assets/…`, `/css/…`, `/js/…`) for the user site at `https://valdagon.github.io/`. Local preview: `python3 -m http.server` (not `file://`).
 - Do not commit `node_modules/`.
 - Before done: open the page (browser MCP if available) and click the primary CTA.

@@ -10,7 +10,7 @@
 
 | | |
 |---|---|
-| **Live** | Static HTML/CSS/JS · GitHub Pages `main` `/` · https://valdagon.github.io/card/ |
+| **Live** | Static HTML/CSS/JS · GitHub Pages user site · https://valdagon.github.io/ |
 | **Next** | Человек заполняет гейты (FL / Профи / Upwork URL). Правки копи — `js/data.js`. |
 | **Проверка** | Открыть `index.html` (или `python3 -m http.server 4173`) · 375px + десктоп · RU/EN/SR |
 
@@ -42,7 +42,7 @@
 4. Остаёмся в **этом** корне. Исключение: зеркало `~/.cursor/skills`.
 5. Нельзя трогать: `.env`, чужие телефоны/почты, Crystal OS internals.
 6. Один эксперимент — одна переменная.
-7. Пути ассетов относительные (`./…`) — сайт живёт на `/{repo}/`.
+7. Пути ассетов корневые (`/assets/…`, `/css/…`, `/js/…`) — канон https://valdagon.github.io/. Локально: `python3 -m http.server`, не `file://`. Старый `/card/` редиректит на `/`.
 
 ## 5. Конец сессии
 

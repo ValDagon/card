@@ -2,8 +2,8 @@
    Contacts split: RU = self-employed + RU exchanges; EN/SR = Sensual Studio DOO.
    Do not invent URLs — use placeholder: true instead. */
 window.SITE = {
-  siteUrl: "https://valdagon.github.io/card/",
-  photo: "./assets/portrait.jpg?v=1",
+  siteUrl: "https://valdagon.github.io/",
+  photo: "/assets/portrait.jpg?v=2",
   langs: ["ru", "en", "sr"],
   telegram: "https://t.me/valdk_corp",
   github: "https://github.com/ValDagon",

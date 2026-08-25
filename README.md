@@ -2,7 +2,7 @@
 
 Personal multilingual card (RU / EN / SR-Latn) for GitHub Pages.
 
-**Live:** https://valdagon.github.io/card/
+**Live:** https://valdagon.github.io/
 
 Local path: `/Users/valentin/Work/kazantsev-card`
 
@@ -21,13 +21,13 @@ python3 -m http.server 4173
 
 Open http://127.0.0.1:4173/?lang=ru — also `en` and `sr`.
 
-Or open `index.html` directly. Asset paths are relative (`./assets/…`) so the site works at `/card/` on Pages.
+Do not open `index.html` as a file — asset paths are root-absolute (`/assets/…`).
 
 ## GitHub Pages
 
-Repo: [ValDagon/card](https://github.com/ValDagon/card) · branch `main` · folder `/` (root).
+Canonical: [ValDagon/ValDagon.github.io](https://github.com/ValDagon/ValDagon.github.io) · user site · https://valdagon.github.io/
 
-Settings → Pages → Deploy from a branch → `main` / `/`. Public repo required for free user Pages.
+Mirror + redirect: [ValDagon/card](https://github.com/ValDagon/card) still publishes at `/card/` and sends visitors to `/`.
 
 ## Edit copy / add a project
 

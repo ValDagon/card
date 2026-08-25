@@ -135,6 +135,13 @@
     var L = state.lang;
     setMeta();
 
+    var portrait = document.querySelector("img.portrait");
+    if (portrait && D.photo) portrait.setAttribute("src", D.photo);
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical && D.siteUrl) canonical.setAttribute("href", D.siteUrl);
+    var ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl && D.siteUrl) ogUrl.setAttribute("content", D.siteUrl);
+
     setText("skip", t(D.ui.skip));
     setText("lang-label", t(D.ui.langLabel));
     document.querySelectorAll("[data-nav]").forEach(function (a) {
