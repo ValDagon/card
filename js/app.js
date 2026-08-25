@@ -76,6 +76,20 @@
     return wrap;
   }
 
+  function setPrimaryCta(node) {
+    if (state.lang === "ru") {
+      node.textContent = t(SITE.ui.cta);
+      node.setAttribute("href", SITE.telegram);
+      node.setAttribute("rel", "noopener noreferrer");
+      node.setAttribute("target", "_blank");
+    } else {
+      node.textContent = t(SITE.ui.navContact);
+      node.setAttribute("href", "#contact");
+      node.removeAttribute("rel");
+      node.removeAttribute("target");
+    }
+  }
+
   function render() {
     var D = SITE;
     var L = state.lang;
@@ -93,8 +107,7 @@
     document.getElementById("entity").textContent = t(D.hero.entity);
 
     var cta = document.getElementById("cta");
-    cta.textContent = t(D.ui.cta);
-    cta.setAttribute("href", D.telegram);
+    setPrimaryCta(cta);
 
     var ctaK = document.getElementById("cta-kwork");
     if (L === "ru") {
@@ -115,8 +128,7 @@
     }
 
     var cta2 = document.getElementById("cta2");
-    cta2.textContent = t(D.ui.cta);
-    cta2.setAttribute("href", D.telegram);
+    setPrimaryCta(cta2);
 
     var ctaK2 = document.getElementById("cta-kwork2");
     if (L === "ru") {
