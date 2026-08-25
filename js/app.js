@@ -42,7 +42,9 @@
   function setMeta() {
     var meta = SITE.meta[state.lang];
     document.title = meta.title;
-    html.lang = state.lang === "sr" ? "sr-Latn" : state.lang;
+    var langAttr = state.lang === "sr" ? "sr-Latn" : state.lang;
+    html.lang = langAttr;
+    html.setAttribute("lang", langAttr);
     var desc = document.querySelector('meta[name="description"]');
     if (desc) desc.setAttribute("content", meta.description);
     var ogTitle = document.querySelector('meta[property="og:title"]');
@@ -65,9 +67,18 @@
     return node;
   }
 
+  function nodeById(id) {
+    return document.getElementById(id);
+  }
+
+  function setText(id, value) {
+    var node = nodeById(id);
+    if (node) node.textContent = value;
+  }
+
   function chips(list) {
     var wrap = el("ul", "chips");
-    list.forEach(function (c) {
+    (list || []).forEach(function (c) {
       var li = el("li", "chip");
       li.translate = false;
       li.textContent = c;
@@ -77,6 +88,7 @@
   }
 
   function setPrimaryCta(node) {
+    if (!node) return;
     if (state.lang === "ru") {
       node.textContent = t(SITE.ui.cta);
       node.setAttribute("href", SITE.telegram);
@@ -90,173 +102,175 @@
     }
   }
 
+  function setLocaleBtn(id, visible, text, href) {
+    var node = nodeById(id);
+    if (!node) return;
+    node.hidden = !visible;
+    if (!visible) return;
+    if (text != null) node.textContent = text;
+    if (href) {
+      node.setAttribute("href", href);
+      if (href.indexOf("http") === 0) {
+        node.setAttribute("rel", "noopener noreferrer");
+        node.setAttribute("target", "_blank");
+      }
+    }
+  }
+
   function render() {
+    try {
+      renderBody();
+    } catch (err) {
+      if (typeof console !== "undefined" && console.error) {
+        console.error("[vk-card] render failed", err);
+      }
+    }
+  }
+
+  function renderBody() {
+    if (typeof SITE === "undefined") {
+      throw new Error("SITE is not defined — data.js failed to load");
+    }
     var D = SITE;
     var L = state.lang;
     setMeta();
 
-    document.getElementById("skip").textContent = t(D.ui.skip);
-    document.getElementById("lang-label").textContent = t(D.ui.langLabel);
+    setText("skip", t(D.ui.skip));
+    setText("lang-label", t(D.ui.langLabel));
     document.querySelectorAll("[data-nav]").forEach(function (a) {
       a.textContent = t(D.ui[a.getAttribute("data-nav")]);
     });
 
-    document.getElementById("name").textContent = t(D.hero.name);
-    document.getElementById("role").textContent = t(D.hero.role);
-    document.getElementById("entity").textContent = t(D.hero.entity);
+    setText("name", t(D.hero.name));
+    setText("role", t(D.hero.role));
+    setText("entity", t(D.hero.entity));
 
-    var cta = document.getElementById("cta");
-    setPrimaryCta(cta);
+    setPrimaryCta(nodeById("cta"));
+    setLocaleBtn("cta-kwork", L === "ru", t(D.ui.ctaKwork), D.kwork);
+    setLocaleBtn("cta-gh", L !== "ru", "GitHub", D.github);
 
-    var ctaK = document.getElementById("cta-kwork");
-    if (L === "ru") {
-      ctaK.hidden = false;
-      ctaK.textContent = t(D.ui.ctaKwork);
-      ctaK.setAttribute("href", D.kwork);
-    } else {
-      ctaK.hidden = true;
+    setPrimaryCta(nodeById("cta2"));
+    setLocaleBtn("cta-kwork2", L === "ru", t(D.ui.ctaKwork), D.kwork);
+    setLocaleBtn("cta-gh2", L !== "ru", "GitHub", D.github);
+
+    setText("outro-title", t(D.ui.outroTitle));
+    setText("outro-line", t(D.ui.outroLine));
+
+    var stats = nodeById("stats");
+    if (stats) {
+      stats.replaceChildren();
+      (D.stats || []).forEach(function (s) {
+        var item = el("div", "stat");
+        var v = el("span", "stat-v", s.value);
+        v.translate = false;
+        item.appendChild(v);
+        item.appendChild(el("span", "stat-l", t(s.label)));
+        stats.appendChild(item);
+      });
     }
 
-    var ctaGh = document.getElementById("cta-gh");
-    if (L === "ru") {
-      ctaGh.hidden = true;
-    } else {
-      ctaGh.hidden = false;
-      ctaGh.textContent = "GitHub";
-      ctaGh.setAttribute("href", D.github);
+    setText("h-stack", t(D.ui.navStack));
+    setText("h-gigs", t(D.ui.navGigs));
+    setText("h-cv", t(D.ui.navCv));
+    setText("h-work", t(D.ui.navWork));
+    setText("h-contact", t(D.ui.navContact));
+
+    var stack = nodeById("stack-groups");
+    if (stack) {
+      stack.replaceChildren();
+      (D.stackGroups || []).forEach(function (g) {
+        var card = el("div", "stack-group");
+        card.appendChild(el("h3", "stack-h", t(g.title)));
+        card.appendChild(chips(g.chips));
+        stack.appendChild(card);
+      });
     }
 
-    var cta2 = document.getElementById("cta2");
-    setPrimaryCta(cta2);
-
-    var ctaK2 = document.getElementById("cta-kwork2");
-    if (L === "ru") {
-      ctaK2.hidden = false;
-      ctaK2.textContent = t(D.ui.ctaKwork);
-      ctaK2.setAttribute("href", D.kwork);
-    } else {
-      ctaK2.hidden = true;
+    var gigs = nodeById("gigs-list");
+    if (gigs) {
+      gigs.replaceChildren();
+      (D.gigs || []).forEach(function (g) {
+        var card = el("article", "gig");
+        var top = el("div", "gig-top");
+        var code = el("span", "gig-code", g.code);
+        code.translate = false;
+        top.appendChild(code);
+        top.appendChild(el("h3", "gig-title", t(g.title)));
+        card.appendChild(top);
+        card.appendChild(el("p", "gig-out", t(g.outcome)));
+        card.appendChild(chips(g.stack));
+        gigs.appendChild(card);
+      });
     }
 
-    var ctaGh2 = document.getElementById("cta-gh2");
-    if (L === "ru") {
-      ctaGh2.hidden = true;
-    } else {
-      ctaGh2.hidden = false;
-      ctaGh2.textContent = "GitHub";
-      ctaGh2.setAttribute("href", D.github);
+    var path = nodeById("path-list");
+    if (path) {
+      path.replaceChildren();
+      (D.path || []).forEach(function (p) {
+        var row = el("article", "path-row");
+        var when = el("time", "path-when", t(p.when));
+        when.translate = false;
+        row.appendChild(when);
+        var body = el("div", "path-body");
+        var org = el("p", "path-org", p.org);
+        org.translate = false;
+        body.appendChild(el("h3", "path-role", t(p.role)));
+        body.appendChild(org);
+        body.appendChild(el("p", "path-note", t(p.note)));
+        row.appendChild(body);
+        path.appendChild(row);
+      });
     }
 
-    document.getElementById("outro-title").textContent = t(D.ui.outroTitle);
-    document.getElementById("outro-line").textContent = t(D.ui.outroLine);
-
-    var stats = document.getElementById("stats");
-    stats.replaceChildren();
-    D.stats.forEach(function (s) {
-      var item = el("div", "stat");
-      var v = el("span", "stat-v", s.value);
-      v.translate = false;
-      item.appendChild(v);
-      item.appendChild(el("span", "stat-l", t(s.label)));
-      stats.appendChild(item);
-    });
-
-    function fillHeading(id, key) {
-      var node = document.getElementById(id);
-      if (node) node.textContent = t(D.ui[key]);
-    }
-    fillHeading("h-stack", "navStack");
-    fillHeading("h-gigs", "navGigs");
-    fillHeading("h-cv", "navCv");
-    fillHeading("h-work", "navWork");
-    fillHeading("h-contact", "navContact");
-
-    var stack = document.getElementById("stack-groups");
-    stack.replaceChildren();
-    D.stackGroups.forEach(function (g) {
-      var card = el("div", "stack-group");
-      card.appendChild(el("h3", "stack-h", t(g.title)));
-      card.appendChild(chips(g.chips));
-      stack.appendChild(card);
-    });
-
-    var gigs = document.getElementById("gigs-list");
-    gigs.replaceChildren();
-    D.gigs.forEach(function (g) {
-      var card = el("article", "gig");
-      var top = el("div", "gig-top");
-      var code = el("span", "gig-code", g.code);
-      code.translate = false;
-      top.appendChild(code);
-      top.appendChild(el("h3", "gig-title", t(g.title)));
-      card.appendChild(top);
-      card.appendChild(el("p", "gig-out", t(g.outcome)));
-      card.appendChild(chips(g.stack));
-      gigs.appendChild(card);
-    });
-
-    var path = document.getElementById("path-list");
-    path.replaceChildren();
-    D.path.forEach(function (p) {
-      var row = el("article", "path-row");
-      var when = el("time", "path-when", t(p.when));
-      when.translate = false;
-      row.appendChild(when);
-      var body = el("div", "path-body");
-      var org = el("p", "path-org", p.org);
-      org.translate = false;
-      body.appendChild(el("h3", "path-role", t(p.role)));
-      body.appendChild(org);
-      body.appendChild(el("p", "path-note", t(p.note)));
-      row.appendChild(body);
-      path.appendChild(row);
-    });
-
-    var work = document.getElementById("work-list");
-    work.replaceChildren();
-    D.projects.forEach(function (p) {
-      var card = el("article", "work");
-      card.appendChild(el("h3", "work-title", t(p.title)));
-      card.appendChild(el("p", "work-blurb", t(p.blurb)));
-      card.appendChild(chips(p.stack));
-      var foot = el("p", "work-foot");
-      if (p.url) {
-        var a = el("a", "work-link", t(D.ui.open));
-        a.href = p.url;
-        a.rel = "noopener noreferrer";
-        a.target = "_blank";
-        foot.appendChild(a);
-      } else {
-        foot.appendChild(el("span", "work-private", t(D.ui.private)));
-      }
-      card.appendChild(foot);
-      work.appendChild(card);
-    });
-
-    document.getElementById("contact-intro").textContent = t(D.contactIntro);
-    var clist = document.getElementById("contact-list");
-    clist.replaceChildren();
-    (D.contacts[L] || D.contacts.ru).forEach(function (c) {
-      var li = el("li", "contact-item" + (c.gate ? " is-gate" : ""));
-      if (c.href) {
-        var a = el("a", "contact-link");
-        a.href = c.href;
-        if (c.href.indexOf("http") === 0) {
+    var work = nodeById("work-list");
+    if (work) {
+      work.replaceChildren();
+      (D.projects || []).forEach(function (p) {
+        var card = el("article", "work");
+        card.appendChild(el("h3", "work-title", t(p.title)));
+        card.appendChild(el("p", "work-blurb", t(p.blurb)));
+        card.appendChild(chips(p.stack));
+        var foot = el("p", "work-foot");
+        if (p.url) {
+          var a = el("a", "work-link", t(D.ui.open));
+          a.href = p.url;
           a.rel = "noopener noreferrer";
           a.target = "_blank";
+          foot.appendChild(a);
+        } else {
+          foot.appendChild(el("span", "work-private", t(D.ui.private)));
         }
-        a.appendChild(el("span", "contact-label", c.label));
-        a.appendChild(el("span", "contact-hint", c.hint));
-        li.appendChild(a);
-      } else {
-        li.appendChild(el("span", "contact-label", c.label));
-        li.appendChild(el("span", "contact-hint", c.hint));
-      }
-      clist.appendChild(li);
-    });
+        card.appendChild(foot);
+        work.appendChild(card);
+      });
+    }
 
-    document.getElementById("legal").textContent = t(D.legal);
-    document.getElementById("foot-note").textContent = t(D.footNote);
+    setText("contact-intro", t(D.contactIntro));
+    var clist = nodeById("contact-list");
+    if (clist) {
+      clist.replaceChildren();
+      (D.contacts[L] || D.contacts.ru || []).forEach(function (c) {
+        var li = el("li", "contact-item" + (c.gate ? " is-gate" : ""));
+        if (c.href) {
+          var a = el("a", "contact-link");
+          a.href = c.href;
+          if (c.href.indexOf("http") === 0) {
+            a.rel = "noopener noreferrer";
+            a.target = "_blank";
+          }
+          a.appendChild(el("span", "contact-label", c.label));
+          a.appendChild(el("span", "contact-hint", c.hint));
+          li.appendChild(a);
+        } else {
+          li.appendChild(el("span", "contact-label", c.label));
+          li.appendChild(el("span", "contact-hint", c.hint));
+        }
+        clist.appendChild(li);
+      });
+    }
+
+    setText("legal", t(D.legal));
+    setText("foot-note", t(D.footNote));
 
     document.querySelectorAll(".lang-btn").forEach(function (btn) {
       var on = btn.getAttribute("data-lang") === L;

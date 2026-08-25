@@ -253,7 +253,7 @@ window.SITE = {
   projects: [
     {
       id: "relomap",
-      url: "https://relomap.vercel.app",
+      url: null,
       stack: ["Next.js", "Supabase", "Vercel", "grammY"],
       title: {
         ru: "Relomap",
